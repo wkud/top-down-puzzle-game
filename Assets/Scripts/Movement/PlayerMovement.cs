@@ -76,21 +76,11 @@ namespace Project.Movement
             var walkingDirection = context.ReadValue<Vector2>().ToVector3();
             var targetPosition = transform.position + walkingDirection;
 
-            if (debugUseBeat && !rhythmManager.IsOnBeat(debugUseBeat)) // off-beat penalty is in IsOnBeat method // TODO change to TRUE
-            {
-                return;
-            }
-
             var hasLookingDirectionChanged = UpdateLookingDirection(walkingDirection);
 
             if (collisionManager.IsTileWalkable(targetPosition))
             {
                 Move(targetPosition); // no beat penalty (has moves = no collision)
-                penaltyRewardManager.Reward();
-            }
-            else if (!hasLookingDirectionChanged) // no move and no rotation change => nothing happened
-            {
-                penaltyRewardManager.Penalize(); // Penalization logic like end of combo
             }
         }
 
