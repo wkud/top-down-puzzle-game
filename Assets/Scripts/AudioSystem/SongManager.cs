@@ -16,28 +16,10 @@ namespace Project.AudioSystem
 
         private bool songIsPlaying;
 
-        private void OnEnable()
-        {
-            rhythmManager.onBeat += PlayBeatSFX;
-        }
-
-        private void OnDisable()
-        {
-            rhythmManager.onBeat -= PlayBeatSFX;
-        }
-        
         public void StartSong()
         {
             audioManager.PlayMusic(songData.Song, songData.Delay);
             rhythmManager.StartRhythm(songData.Bpm);
-        }
-
-        private void PlayBeatSFX()
-        {
-            if(songData.BeatSFX)
-            {
-                audioManager.PlaySoundEffect(songData.BeatSFX);
-            }
         }
     }
 }
